@@ -27,14 +27,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  db-admin:
-    image: dbeaver/cloudbeaver:latest
-    ports:
-      - 8081:8978
-    volumes:
-      - cloudbeaver-data:/opt/cloudbeaver/workspace
-    profiles:
-      - db-admin
 
 volumes:
   postgres-data:

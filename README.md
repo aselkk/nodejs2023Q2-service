@@ -1,11 +1,5 @@
 # Home Library Service
 
-### Docker cmd
-
-```
-docker-compose up
-```
-
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
@@ -76,4 +70,3 @@ npm run format
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
-
