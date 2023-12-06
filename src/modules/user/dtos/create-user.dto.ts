@@ -8,10 +8,10 @@ export class CreateUserDto {
   @IsString()
   password: string;
 
-  toEntity(): User {
+  static toEntity(data: CreateUserDto): User {
     const user = new User();
-    user.login = this.login;
-    user.password = this.password;
+    user.login = data.login;
+    user.password = data.password;
     return user;
   }
 }
