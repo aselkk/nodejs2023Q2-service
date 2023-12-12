@@ -7,7 +7,7 @@ import { Track } from '../track/track.entity';
 import { Favorite } from './favorite.entity';
 
 @Injectable()
-export class FavoritesService {
+export class FavoriteService {
   constructor(
     @InjectRepository(Favorite) private favsRepository: Repository<Favorite>,
     @InjectRepository(Artist) private artistsRepository: Repository<Artist>,

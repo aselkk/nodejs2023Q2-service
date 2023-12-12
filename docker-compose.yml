@@ -27,14 +27,15 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  db-admin:
-    image: dbeaver/cloudbeaver:latest
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - 8081:8978
-    volumes:
-      - cloudbeaver-data:/opt/cloudbeaver/workspace
-    profiles:
-      - db-admin
+      - '5050:80'
+    depends_on:
+      - db
 
 volumes:
   postgres-data:

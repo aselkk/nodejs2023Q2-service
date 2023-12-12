@@ -18,6 +18,9 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  salt: string;
+
   @VersionColumn()
   version: number; // integer number, increments on update
 

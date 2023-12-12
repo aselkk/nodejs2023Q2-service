@@ -1,10 +1,10 @@
 import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
-import { FavoritesService } from './favorite.service';
+import { FavoriteService } from './favorite.service';
 
 @Controller('favs')
-export class ArtistController {
-  constructor(private readonly favoritesService: FavoritesService) {}
+export class FavoriteController {
+  constructor(private readonly favoritesService: FavoriteService) {}
 
   @Get()
   findAllFavs() {
