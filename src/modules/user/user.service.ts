@@ -1,10 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  private readonly logger = new Logger(UserService.name);
+
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
@@ -16,6 +18,7 @@ export class UserService {
   findById(id: string): Promise<User> {
     return this.userRepository.findOneBy({ id: id }).then((user) => {
       if (!user) {
+        this.logger.error('User not found', { id });
         throw new NotFoundException('User not found');
       }
       return user;

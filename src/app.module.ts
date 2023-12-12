@@ -1,11 +1,17 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { LoggingService, LogLevel } from './modules/logging/logging.service';
+import { CustomExceptionFilter } from './modules/logging/custom-exception.filter';
 import { Album } from './modules/album/album.entity';
+import { AlbumModule } from './modules/album/album.module';
 import { AppController } from './app.controller';
 import { Artist } from './modules/artist/artist.entity';
-import { ConfigModule } from '@nestjs/config';
+import { ArtistModule } from './modules/artist/artist.module';
 import { Favorite } from './modules/favorite/favorite.entity';
-import { Module } from '@nestjs/common';
+import { FavoriteModule } from './modules/favorite/favorite.module';
 import { Track } from './modules/track/track.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TrackModule } from './modules/track/track.module';
 import { User } from './modules/user/user.entity';
 import { UserModule } from './modules/user/user.module';
 
@@ -19,8 +25,26 @@ import { UserModule } from './modules/user/user.module';
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     UserModule,
+    AlbumModule,
+    ArtistModule,
+    TrackModule,
+    FavoriteModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [
+    LoggingService,
+    {
+      provide: 'LoggingService',
+      useClass: LoggingService,
+    },
+    {
+      provide: 'ExceptionFilter',
+      useClass: CustomExceptionFilter,
+    },
+    {
+      provide: 'LogLevel',
+      useValue: process.env.LOG_LEVEL || LogLevel.INFO, // Set default log level
+    },
+  ],
 })
 export class AppModule {}
